@@ -64,12 +64,87 @@
       50% { color: #fff; }
       100% { color: #fff; }
     }
+    .sc-player {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+      border: 0;
+    }
+    .attribution {
+      position: fixed;
+      right: 12px;
+      bottom: 12px;
+      z-index: 10;
+      text-align: right;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.4;
+      color: #fff;
+      text-shadow: 0 1px 3px #000, 0 0 6px #000;
+    }
+    .attribution a {
+      color: #fff;
+      text-shadow: 0 1px 3px #000, 0 0 6px #000;
+    }
   </style>
 </head>
 <body>
   <div class="title-wrap">
     <img class="title-gif" src="text-bg.gif" alt="">
     <div class="gothic-title">13roxxide</div>
+  </div>
+
+  <iframe id="sc-player" class="sc-player" title="SoundCloud player" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fyume%2Flost-flp-beats-2&amp;color=%23000000&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false&amp;visual=false"></iframe>
+  <script src="https://w.soundcloud.com/player/api.js"></script>
+  <script>
+    (function () {
+      var iframe = document.getElementById('sc-player');
+      var widget = SC.Widget(iframe);
+      var playbackStarted = false;
+
+      function startSegment() {
+        widget.seekTo(1077000);
+        widget.play();
+      }
+
+      widget.bind(SC.Widget.Events.READY, function () {
+        startSegment();
+      });
+
+      widget.bind(SC.Widget.Events.PLAY, function () {
+        playbackStarted = true;
+      });
+
+      widget.bind(SC.Widget.Events.PLAY_PROGRESS, function (event) {
+        if (event.currentPosition >= 1134000) {
+          widget.seekTo(1077000);
+          widget.play();
+        }
+      });
+
+      widget.bind(SC.Widget.Events.FINISH, function () {
+        widget.seekTo(1077000);
+        widget.play();
+      });
+
+      function startOnFirstInteraction() {
+        if (!playbackStarted) {
+          startSegment();
+        }
+      }
+      document.addEventListener('click', startOnFirstInteraction);
+      document.addEventListener('touchstart', startOnFirstInteraction);
+      document.addEventListener('keydown', startOnFirstInteraction);
+    })();
+  </script>
+
+  <div class="attribution">
+    <div>Автор битов: hyaketekehatkeha0345</div>
+    <a href="https://on.soundcloud.com/437MQknv9hBVdS7XaI" target="_blank" rel="noopener">Бит-пак на SoundCloud</a>
   </div>
 </body>
 </html>
