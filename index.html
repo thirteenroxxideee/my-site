@@ -171,31 +171,70 @@
     (function () {
       var iframe = document.getElementById('sc-player');
       var widget = SC.Widget(iframe);
+      var SEG_START = 1077000;
+      var SEG_END = 1134000;
       var playbackStarted = false;
+      var isPlaying = false;
+      var poller = null;
+
+      function enforceRange(pos) {
+        if (typeof pos !== 'number' || isNaN(pos)) {
+          return;
+        }
+        if (pos < SEG_START - 250 || pos >= SEG_END) {
+          widget.seekTo(SEG_START);
+        }
+      }
 
       function startSegment() {
-        widget.seekTo(1077000);
+        widget.seekTo(SEG_START);
         widget.play();
+      }
+
+      function startPoller() {
+        if (poller) {
+          return;
+        }
+        poller = setInterval(function () {
+          if (!isPlaying) {
+            return;
+          }
+          widget.getPosition(function (pos) {
+            enforceRange(pos);
+          });
+        }, 400);
+      }
+
+      function stopPoller() {
+        if (poller) {
+          clearInterval(poller);
+          poller = null;
+        }
       }
 
       widget.bind(SC.Widget.Events.READY, function () {
         widget.setVolume(80);
-        startSegment();
+        widget.seekTo(SEG_START);
+        widget.play();
       });
 
       var playToggle = document.getElementById('play-toggle');
       var volumeSlider = document.getElementById('volume-slider');
-      var isPlaying = false;
 
       widget.bind(SC.Widget.Events.PLAY, function () {
         playbackStarted = true;
         isPlaying = true;
         playToggle.textContent = '❚❚ Pause';
+        widget.getPosition(function (pos) {
+          enforceRange(pos);
+        });
+        startPoller();
       });
 
       widget.bind(SC.Widget.Events.PAUSE, function () {
         isPlaying = false;
         playToggle.textContent = '▶ Play';
+        stopPoller();
       });
 
       playToggle.addEventListener('click', function () {
@@ -205,7 +244,10 @@
         }
         widget.isPaused(function (isPaused) {
           if (isPaused) {
-            widget.play();
+            widget.getPosition(function (pos) {
+              enforceRange(pos);
+              widget.play();
+            });
           } else {
             widget.pause();
           }
@@ -217,14 +259,11 @@
       });
 
       widget.bind(SC.Widget.Events.PLAY_PROGRESS, function (event) {
-        if (event.currentPosition >= 1134000) {
-          widget.seekTo(1077000);
-          widget.play();
-        }
+        enforceRange(event.currentPosition);
       });
 
       widget.bind(SC.Widget.Events.FINISH, function () {
-        widget.seekTo(1077000);
+        widget.seekTo(SEG_START);
         widget.play();
       });
 
