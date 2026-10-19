@@ -53,6 +53,47 @@
       height: 50dvh;
       width: 100%;
     }
+    .ad-marquee {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ad-marquee-top {
+      top: 0;
+    }
+    .ad-marquee-bottom {
+      bottom: 0;
+    }
+    .ad-marquee-track {
+      display: inline-flex;
+      width: max-content;
+      white-space: nowrap;
+      animation: ad-scroll 20s linear infinite;
+    }
+    .ad-marquee-half {
+      display: inline-flex;
+      white-space: nowrap;
+    }
+    .ad-marquee-half span {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      padding-right: 24px;
+      background-image: url('ad-texture.jpg');
+      background-size: cover;
+      background-position: center;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+    @keyframes ad-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
     .links-space {
       position: relative;
       z-index: 2;
@@ -257,7 +298,11 @@
     <img class="side-strip side-right" src="side.jpg" alt="">
   </div>
 
-  <section class="ad-space"><!-- Ad banner will go here in the future --></section>
+  <section class="ad-space">
+    <div class="ad-marquee ad-marquee-top"><div class="ad-marquee-track"><div class="ad-marquee-half"><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span></div><div class="ad-marquee-half"><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span></div></div></div>
+    <!-- Ad banner will go here in the future -->
+    <div class="ad-marquee ad-marquee-bottom"><div class="ad-marquee-track"><div class="ad-marquee-half"><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span></div><div class="ad-marquee-half"><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span></div></div></div>
+  </section>
 
   <section class="links-space">
     <a href="https://on.soundcloud.com/NbtfKFX7KSs9UugjcY" target="_blank" rel="noopener">https://on.soundcloud.com/NbtfKFX7KSs9UugjcY</a>
