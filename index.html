@@ -10,9 +10,16 @@
   <style>
     html, body {
       height: 100%;
+      width: 100%;
+      max-width: 100%;
       margin: 0;
       padding: 0;
       overflow: hidden;
+      overflow-x: hidden;
+      overflow-x: clip;
+      position: relative;
+      overscroll-behavior-x: none;
+      touch-action: pan-y;
     }
     body {
       background: url('bg.jpg') center center / 100% 100% no-repeat fixed;
@@ -23,6 +30,8 @@
       top: 0;
       height: 100vh;
       width: calc((100vw - 85vw) / 2);
+      max-width: calc((100vw - 85vw) / 2);
+      box-sizing: border-box;
       object-fit: fill;
       z-index: 0;
       pointer-events: none;
@@ -37,6 +46,7 @@
       position: relative;
       width: 85vw;
       max-width: 85vw;
+      box-sizing: border-box;
       height: 100vh;
       margin: 0 auto;
       overflow: hidden;
@@ -59,6 +69,8 @@
       justify-content: center;
       width: 100%;
       max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
       height: 100%;
       margin: 0 auto;
       text-align: center;
@@ -103,7 +115,8 @@
       font-family: Arial, sans-serif;
       font-size: 12px;
       line-height: 1.4;
-      max-width: 240px;
+      max-width: min(240px, calc(100vw - 24px));
+      box-sizing: border-box;
     }
     .custom-player-label {
       margin-bottom: 8px;
@@ -135,6 +148,8 @@
       position: fixed;
       right: 12px;
       bottom: 12px;
+      max-width: calc(100vw - 24px);
+      box-sizing: border-box;
       z-index: 10;
       text-align: right;
       font-family: Arial, sans-serif;
