@@ -4,17 +4,46 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Мой сайт</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
   <style>
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
+      overflow: hidden;
     }
     body {
       background: url('bg.jpg') center center / 100% 100% no-repeat fixed;
+      position: relative;
+    }
+    .gothic-title {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 85vw;
+      max-width: 85vw;
+      height: 100vh;
+      margin: 0 auto;
+      text-align: center;
+      white-space: nowrap;
+      font-family: 'UnifrakturMaguntia', serif;
+      font-size: 12.5vw;
+      line-height: 1;
+      font-weight: 400;
+      color: #ffffff;
+      -webkit-text-stroke: 1px rgba(0, 0, 0, 0.85);
+      text-shadow: 0 0 6px #000, 0 0 18px #000, 0 0 32px rgba(0,0,0,0.9), 3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000;
+      transform: scaleY(3.4);
+      transform-origin: center center;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
+  <div class="gothic-title">13roxxide</div>
 </body>
 </html>
