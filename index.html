@@ -95,6 +95,76 @@
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
+    .fake-ad {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      width: min(320px, calc(100% - 40px));
+      max-height: calc(100% - 110px);
+      box-sizing: border-box;
+      overflow: hidden;
+      border-radius: 0;
+      padding: 8px;
+      background: repeating-linear-gradient(45deg, #ffe600 0 12px, #000 12px 24px);
+    }
+    .fake-ad-inner {
+      position: relative;
+      background: #000;
+      border-radius: 0;
+      padding: 18px 16px 22px;
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .fake-ad-brand {
+      color: #ffe600;
+      font-size: clamp(28px, 8vw, 40px);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .fake-ad-sub {
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.4;
+      margin-top: 8px;
+    }
+    .fake-ad-price {
+      color: #ffe600;
+      font-size: 13px;
+      line-height: 1.4;
+      margin-top: 8px;
+    }
+    .fake-ad-button {
+      background: #e00;
+      color: #fff;
+      border: 0;
+      border-radius: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 10px 22px;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+    .fake-ad-button.shake {
+      animation: fake-ad-shake 0.3s linear;
+    }
+    @keyframes fake-ad-shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      50% { transform: translateX(4px); }
+      75% { transform: translateX(-4px); }
+      100% { transform: translateX(0); }
+    }
+    .fake-ad-label {
+      position: absolute;
+      right: 8px;
+      bottom: 6px;
+      color: #999;
+      font-size: 10px;
+      line-height: 1;
+    }
     .links-space {
       position: relative;
       z-index: 2;
@@ -301,7 +371,23 @@
 
   <section class="ad-space">
     <div class="ad-marquee ad-marquee-top"><div class="ad-marquee-track"><div class="ad-marquee-half"><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span></div><div class="ad-marquee-half"><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span></div></div></div>
-    <!-- Ad banner will go here in the future -->
+    <div class="fake-ad">
+      <div class="fake-ad-inner">
+        <div class="fake-ad-brand">THIRTEEN COLA</div>
+        <div class="fake-ad-sub">now with 0% cola. 100% glitch.</div>
+        <div class="fake-ad-price">$0.00 — sold nowhere</div>
+        <button class="fake-ad-button" type="button">BUY NOW</button>
+        <div class="fake-ad-label">fake ad</div>
+      </div>
+    </div>
+    <script>
+      document.querySelector('.fake-ad-button').addEventListener('click', function () {
+        var button = this;
+        button.classList.remove('shake');
+        void button.offsetWidth;
+        button.classList.add('shake');
+      });
+    </script>
     <div class="ad-marquee ad-marquee-bottom"><div class="ad-marquee-track"><div class="ad-marquee-half"><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span></div><div class="ad-marquee-half"><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span><span>thirteen advert</span></div></div></div>
   </section>
 
