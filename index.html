@@ -74,6 +74,47 @@
       pointer-events: none;
       border: 0;
     }
+    .custom-player {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 20;
+      background: #2a2a2a;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 0;
+      padding: 10px 12px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.4;
+      max-width: 240px;
+    }
+    .custom-player-label {
+      margin-bottom: 8px;
+      color: #fff;
+      white-space: normal;
+    }
+    .custom-player-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .play-toggle {
+      background: #333;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 0;
+      padding: 6px 10px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .volume-slider {
+      width: 100px;
+      border-radius: 0;
+      accent-color: #fff;
+      cursor: pointer;
+    }
     .attribution {
       position: fixed;
       right: 12px;
@@ -98,6 +139,14 @@
     <div class="gothic-title">13roxxide</div>
   </div>
 
+  <div class="custom-player">
+    <div class="custom-player-label">more lost flp beats — 17:57–18:54 loop</div>
+    <div class="custom-player-controls">
+      <button id="play-toggle" class="play-toggle" type="button">▶ Play</button>
+      <input id="volume-slider" class="volume-slider" type="range" min="0" max="100" value="80" aria-label="Volume">
+    </div>
+  </div>
+
   <iframe id="sc-player" class="sc-player" title="SoundCloud player" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fyume%2Flost-flp-beats-2&amp;color=%23000000&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false&amp;visual=false"></iframe>
   <script src="https://w.soundcloud.com/player/api.js"></script>
   <script>
@@ -112,11 +161,41 @@
       }
 
       widget.bind(SC.Widget.Events.READY, function () {
+        widget.setVolume(80);
         startSegment();
       });
 
+      var playToggle = document.getElementById('play-toggle');
+      var volumeSlider = document.getElementById('volume-slider');
+      var isPlaying = false;
+
       widget.bind(SC.Widget.Events.PLAY, function () {
         playbackStarted = true;
+        isPlaying = true;
+        playToggle.textContent = '❚❚ Pause';
+      });
+
+      widget.bind(SC.Widget.Events.PAUSE, function () {
+        isPlaying = false;
+        playToggle.textContent = '▶ Play';
+      });
+
+      playToggle.addEventListener('click', function () {
+        if (!playbackStarted) {
+          startSegment();
+          return;
+        }
+        widget.isPaused(function (isPaused) {
+          if (isPaused) {
+            widget.play();
+          } else {
+            widget.pause();
+          }
+        });
+      });
+
+      volumeSlider.addEventListener('input', function () {
+        widget.setVolume(parseInt(volumeSlider.value, 10));
       });
 
       widget.bind(SC.Widget.Events.PLAY_PROGRESS, function (event) {
@@ -143,8 +222,8 @@
   </script>
 
   <div class="attribution">
-    <div>Автор битов: hyaketekehatkeha0345</div>
-    <a href="https://on.soundcloud.com/437MQknv9hBVdS7XaI" target="_blank" rel="noopener">Бит-пак на SoundCloud</a>
+    <div>Beats by hyaketekehatkeha0345</div>
+    <a href="https://on.soundcloud.com/437MQknv9hBVdS7XaI" target="_blank" rel="noopener">Beat pack on SoundCloud</a>
   </div>
 </body>
 </html>
