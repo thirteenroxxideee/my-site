@@ -35,9 +35,16 @@
       line-height: 1;
       font-weight: 400;
       color: #000;
+      animation: flicker-color 4s infinite;
       transform: scaleY(3.4);
       transform-origin: center center;
       pointer-events: none;
+    }
+    @keyframes flicker-color {
+      0% { color: #000; }
+      49.9% { color: #000; }
+      50% { color: #fff; }
+      100% { color: #fff; }
     }
   </style>
 </head>
