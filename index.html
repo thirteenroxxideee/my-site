@@ -18,6 +18,21 @@
       background: url('bg.jpg') center center / 100% 100% no-repeat fixed;
       position: relative;
     }
+    .side-strip {
+      position: fixed;
+      top: 0;
+      height: 100vh;
+      width: calc((100vw - 85vw) / 2);
+      object-fit: fill;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .side-left {
+      left: 0;
+    }
+    .side-right {
+      right: 0;
+    }
     .title-wrap {
       position: relative;
       width: 85vw;
@@ -135,6 +150,8 @@
   </style>
 </head>
 <body>
+  <img class="side-strip side-left" src="side.jpg" alt="">
+  <img class="side-strip side-right" src="side.jpg" alt="">
   <div class="title-wrap">
     <img class="title-gif" src="text-bg.gif" alt="">
     <div class="gothic-title">13roxxide</div>
