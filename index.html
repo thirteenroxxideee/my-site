@@ -26,24 +26,31 @@
       position: relative;
     }
     .side-strip {
+      display: block;
+      visibility: visible;
+      opacity: 1;
       position: fixed;
       top: 0;
       height: 100vh;
-      width: calc((100vw - 85vw) / 2);
-      max-width: calc((100vw - 85vw) / 2);
+      height: 100dvh;
+      width: 7.5vw;
+      max-width: 7.5vw;
       box-sizing: border-box;
       object-fit: fill;
-      z-index: 0;
+      z-index: 1;
       pointer-events: none;
     }
     .side-left {
       left: 0;
+      right: auto;
     }
     .side-right {
+      left: auto;
       right: 0;
     }
     .title-wrap {
       position: relative;
+      z-index: 2;
       width: 85vw;
       max-width: 85vw;
       box-sizing: border-box;
@@ -115,7 +122,8 @@
       font-family: Arial, sans-serif;
       font-size: 12px;
       line-height: 1.4;
-      max-width: min(240px, calc(100vw - 24px));
+      width: min(240px, calc(100vw - 24px));
+      max-width: calc(100vw - 24px);
       box-sizing: border-box;
     }
     .custom-player-label {
@@ -125,8 +133,11 @@
     }
     .custom-player-controls {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       gap: 8px;
+      max-width: 100%;
+      box-sizing: border-box;
     }
     .play-toggle {
       background: #333;
